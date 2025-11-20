@@ -10,5 +10,7 @@ Comandos:
 
 -npm install react-markdown
 
+-npm install remark-gfm
+
 Correr el codigo:
 npm run dev
