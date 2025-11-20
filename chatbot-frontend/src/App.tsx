@@ -1,10 +1,6 @@
 import ChatPage from "./pages/ChatPage";
-import { useChat } from "./hooks/useChat";
-import ModelSelector from "./components/ModelSelector";
 
 function App() {
-  const { model, setModel } = useChat();
-
   return (
     <div className="min-h-screen bg-[#0f172a] text-gray-200 flex flex-col">
 
@@ -12,9 +8,6 @@ function App() {
         <h1 className="text-2xl font-bold text-white tracking-wide">
           AI ChatBot
         </h1>
-
-        {/* Modelo Selector */}
-        <ModelSelector model={model} setModel={setModel} />
       </header>
 
       <section className="text-center py-16 px-8 bg-gradient-to-b from-[#0f172a] to-[#1e293b]">
