@@ -3,7 +3,7 @@ import { v4 as uuid } from "uuid";
 import type { ChatMessage } from "../models/ChatMessage";
 import { sendMessage } from "../services/chatService";
 
-export const useChat = () => {
+export const useChat = (provider: string) => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [loading, setLoading] = useState(false);
   const [sessionId] = useState(() => uuid());
@@ -19,25 +19,29 @@ export const useChat = () => {
     setMessages(prev => [...prev, newMessage]);
     setLoading(true);
 
+    console.log("MODELO SELECCIONADO:", provider);
+
     try {
-      const result = await sendMessage(text, sessionId);
+      const result = await sendMessage(text, sessionId, provider);
 
       const botMessage: ChatMessage = {
         id: uuid(),
         from: "bot",
-        text: result.output,     // backend returns "output"
+        text: result.output,
         timestamp: Date.now(),
       };
 
       setMessages(prev => [...prev, botMessage]);
     } catch (error) {
-      const errorMessage: ChatMessage = {
-        id: uuid(),
-        from: "bot",
-        text: "⚠️ El backend no está disponible.",
-        timestamp: Date.now(),
-      };
-      setMessages(prev => [...prev, errorMessage]);
+      setMessages(prev => [
+        ...prev,
+        {
+          id: uuid(),
+          from: "bot",
+          text: "⚠️ Backend no disponible.",
+          timestamp: Date.now(),
+        },
+      ]);
     }
 
     setLoading(false);

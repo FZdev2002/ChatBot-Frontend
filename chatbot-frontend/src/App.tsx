@@ -1,6 +1,10 @@
+import { useState } from "react";
 import ChatPage from "./pages/ChatPage";
+import ModelSelector from "./components/ModelSelector";
 
 function App() {
+  const [provider, setProvider] = useState("n8n"); // modelo default
+
   return (
     <div className="min-h-screen bg-[#0f172a] text-gray-200 flex flex-col">
 
@@ -19,9 +23,11 @@ function App() {
         </p>
       </section>
 
+      <ModelSelector provider={provider} onChange={setProvider} />
+
       <section className="flex-1 flex justify-center items-start py-10 px-4">
         <div className="w-full max-w-3xl">
-          <ChatPage />
+          <ChatPage provider={provider} />
         </div>
       </section>
 

@@ -2,8 +2,8 @@ import MessageBubble from "../components/MessageBubble";
 import ChatInput from "../components/ChatInput";
 import { useChat } from "../hooks/useChat";
 
-export default function ChatPage() {
-  const { messages, send, loading } = useChat();
+export default function ChatPage({ provider }: { provider: string }) {
+  const { messages, send, loading } = useChat(provider);
 
   return (
     <div className="flex flex-col h-[550px] bg-[#1e293b] shadow-xl rounded-2xl overflow-hidden border border-gray-700">
